@@ -9,7 +9,7 @@ const DIGITAL_PRODUCTS = [
 ];
 
 const GAMES = [
-  { title: 'גלגל העורף', subtitle: 'גלגל מזלות אינטראקטיבי על החברה הישראלית', icon: img('products/wheel.png'), url: 'https://inri-pkrf.github.io/wheel-game/' },
+  { title: 'גלגל העורף', subtitle: 'גלגל מזלות אינטראקטיבי על החברה הישראלית', icon: img('products/wheel.png'), url: 'https://inri-pkrf.github.io/wheel-game-2/' },
   { title: 'התאמת לוגואים', subtitle: 'התאמת לוגואים וסמלים אינטראקטיבית', icon: img('products/logos.png'), url: 'https://logo-game-murex.vercel.app' },
   { title: 'מבצע ציוד', subtitle: 'חילוץ והצלה - התאמת הציוד למצב', icon: img('products/equipment.png'), url: 'https://inri-pkrf.github.io/Equipment-Game-/' },
   { title: 'משחק הזיכרון', subtitle: 'אימון זיכרון באמצעות כרטיסי התאמה', icon: img('products/memory.png'), url: 'https://memory-shield-game.vercel.app' },
