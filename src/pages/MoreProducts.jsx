@@ -95,7 +95,7 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
         <img
           src={img('logo.png')}
           alt="Logo"
-          style={{ height: 'clamp(60px, 12vh, 80px)' }}
+          style={{ height: 'clamp(75px, 15vh, 95px)' }}
           className="object-contain" />
         <FullscreenButton
           className="bg-white/40 hover:bg-white/50 shadow-lg"
@@ -104,7 +104,7 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
       </div>
 
       {/* Title */}
-      <div className="text-center z-20 absolute top-0 inset-x-0 pointer-events-none" style={{ marginTop: '9vh' }}>
+      <div className="text-center z-20 absolute top-0 inset-x-0 pointer-events-none" style={{ marginTop: '12vh' }}>
         <h1 className="font-karantina text-[#003A57] font-normal leading-none"
           style={{ fontSize: 'clamp(2.7rem, 7.5vh, 7.5rem)' }}>
           עוד מוצרים דיגיטליים
