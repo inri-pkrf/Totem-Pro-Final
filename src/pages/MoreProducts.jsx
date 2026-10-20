@@ -5,6 +5,7 @@ const DIGITAL_PRODUCTS = [
   { title: 'סקר איומים', subtitle: 'שאלת סקר לבחירת האיום המרכזי על הארגון שלי', icon: img('products/threat-survey.png'), url: 'https://threat-survey-58n9.vercel.app/' },
   { title: 'הצגת המכללה', subtitle: 'לומדת היכרות מעמיקה עם המכללה ומרכיביה השונים', icon: img('products/college-intro.png'), url: 'https://inri-pkrf.github.io/taz-michlala/' },
   { title: 'מצפן החלטות', subtitle: 'כלי עזר לקביעת מדיניות התגוננות לאוכלוסייה', icon: img('products/decision-compass.png'), url: 'https://inri-pkrf.github.io/shelter-compass/' },
+  { title: 'זכרון 7 באוקטובר', subtitle: 'יום הזיכרון הלאומי - לאירועי 7.10.2023', icon: img('products/Candle.png'), url: 'https://october7-one.vercel.app/' },
 ];
 
 const GAMES = [
@@ -16,7 +17,7 @@ const GAMES = [
   { title: 'לוח המדיניות', subtitle: 'תחרות בין קבוצות בנושא מדיניות ההתגוננות', icon: img('products/fate-board.png'), url: 'https://defend-policy-board-with-firebase.vercel.app/' },
   { title: 'אמת או מיתוס', subtitle: 'בדיקת עובדות על מדיניות ההתגוננות', icon: img('products/myth.png'), url: 'https://fact-myth-game.vercel.app' },
   { title: 'דגים הנחיות', subtitle: 'איסוף הנחיות התגוננות מהים', icon: img('products/fish.png'), url: 'https://fish-game-plum.vercel.app/' },
-
+  
 ];
 
 
@@ -82,10 +83,10 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
       dir="rtl">
 
       {/* Decorations */}
-      <div className="absolute top-0 left-0 w-[20%] pointer-events-none opacity-40 z-0">
+      <div className="absolute top-0 left-0 w-[30%] pointer-events-none opacity-1 z-0">
         <img src={img('decor/deco-top.png')} alt="" className="w-full" />
       </div>
-      <div className="absolute bottom-0 right-0 w-[20%] pointer-events-none opacity-40 z-0">
+      <div className="absolute bottom-0 right-0 w-[30%] pointer-events-none opacity-1 z-0">
         <img src={img('decor/deco-bottom.png')} alt="" className="w-full" style={{ transform: 'rotate(180deg)' }} />
       </div>
 
@@ -94,7 +95,7 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
         <img
           src={img('logo.png')}
           alt="Logo"
-          style={{ height: 'clamp(40px, 6vh, 70px)' }}
+          style={{ height: 'clamp(60px, 12vh, 80px)' }}
           className="object-contain" />
         <FullscreenButton
           className="bg-white/40 hover:bg-white/50 shadow-lg"
@@ -113,7 +114,7 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
       {/* Products - fits screen, no scroll */}
       <div className="flex-1 min-h-0 relative z-10 flex flex-col justify-center overflow-hidden" style={{ padding: '1vh 3% 1.5vh', gap: '1.5vh' }}>
         <ProductSection
-          title="מוצרים דיגיטליים"
+          title="למידה"
           products={DIGITAL_PRODUCTS}
           style={{
             background: 'linear-gradient(135deg, rgba(0, 126, 189, 0.03), rgba(0, 58, 87, 0.02))',

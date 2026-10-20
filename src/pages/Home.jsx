@@ -30,7 +30,7 @@ function TotemButton({ btn, onClick }) {
         <img src={CIRCLE_IMG} alt="" className="absolute inset-0 w-full h-full object-contain" />
         <img src={btn.icon} alt="" style={{ width: '55%', height: '55%' }} className="object-contain relative z-10" />
       </div>
-      <span className="flex-1 text-white font-assistant font-medium text-center" style={{ fontSize: 'clamp(1.2rem, 3vh, 2rem)', paddingLeft: '8%' }}>
+      <span className="flex-1 text-white font-assistant font-medium text-center" style={{ fontSize: 'clamp(1.2rem, 5vh, 2rem)', paddingLeft: '8%' }}>
         {btn.label}
       </span>
     </button>
@@ -58,7 +58,7 @@ export default function Home({ onNavigateToVideo, onNavigateHome, showMoreProduc
       dir="rtl">
 
       {/* Title */}
-      <div className="px-[5%] text-center z-10 flex-shrink-0" style={{ marginTop: 'clamp(20px, 5vh, 60px)' }}>
+      <div className="px-[5%] text-center z-10 flex-shrink-0" style={{ marginTop: 'clamp(30px, 10vh, 70px)' }}>
         <h1 className="font-karantina text-white font-normal drop-shadow-lg leading-none"
           style={{ fontSize: 'clamp(2rem, 7vh, 7.5rem)' }}>
           ברוכים הבאים והבאות
@@ -90,7 +90,7 @@ export default function Home({ onNavigateToVideo, onNavigateHome, showMoreProduc
             <img
               src={img('logo.png')}
               alt="Logo"
-              style={{ height: 'clamp(50px, 9vh, 100px)' }}
+              style={{ height: 'clamp(70px, 14vh, 110px)' }}
               className="object-contain" />
           </div>
 
@@ -122,7 +122,7 @@ export default function Home({ onNavigateToVideo, onNavigateHome, showMoreProduc
       </div>
 
       {/* Bottom center image */}
-      <div className="absolute left-1/2 -translate-x-1/2 z-10 flex justify-center" style={{ bottom: '3%' }}>
+      <div className="absolute left-1/2 -translate-x-1/2 z-10 flex justify-center" style={{ bottom: '10%' }}>
         <img
           src={img('text-pic.png')}
           alt=""
