@@ -1,0 +1,128 @@
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Maximize, Minimize } from 'lucide-react';
+import { useFullscreen, enterFullscreen } from '@/hooks/useFullscreen';
+import Home from './Home';
+import MoreProducts from './MoreProducts';
+import VideoScreen from '../components/totem/VideoScreen';
+import NavButtons from '../components/totem/NavButtons';
+import ProductsCarousel from './ProductsCarousel';
+import DateTimeDisplay from '../components/totem/DateTimeDisplay';
+
+const COLOR_SCREEN_COUNT = 4;
+const COLOR_DURATION = 5000;
+const HOME_DURATION = 300000;
+
+export default function TotemController() {
+  const [currentView, setCurrentView] = useState('home');
+  const [homeKey, setHomeKey] = useState(0);
+  const [showMoreProducts, setShowMoreProducts] = useState(false);
+  const [showCarousel, setShowCarousel] = useState(false);
+  const timerRef = useRef(null);
+  const { isFullscreen, toggle: toggleFullscreen } = useFullscreen();
+
+  // כניסה למסך מלא בלחיצה הראשונה (הדפדפן דורש פעולת משתמש).
+  // לחיצה על כפתור מסך מלא עצמו לא נספרת, כדי שלא יתנגש עם הכפתור.
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (e.target.closest?.('[data-fullscreen-toggle]')) return;
+      enterFullscreen();
+      document.removeEventListener('click', handleClick);
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+  const clearTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+
+  const startCycle = useCallback(() => {
+    clearTimer();
+    setCurrentView('home');
+    timerRef.current = setTimeout(() => {
+      setCurrentView('video');
+    }, HOME_DURATION);
+  }, []);
+
+  useEffect(() => {
+    startCycle();
+    return clearTimer;
+  }, [startCycle]);
+
+  useEffect(() => {
+    if (currentView.startsWith('color-')) {
+      const index = parseInt(currentView.split('-')[1]);
+      clearTimer();
+      timerRef.current = setTimeout(() => {
+        if (index < COLOR_SCREEN_COUNT - 1) {
+          setCurrentView(`color-${index + 1}`);
+        } else {
+          setCurrentView('video');
+        }
+      }, COLOR_DURATION);
+    }
+  }, [currentView]);
+
+  const handleVideoEnd = useCallback(() => startCycle(), [startCycle]);
+  const handleNavigateToVideo = useCallback(() => { clearTimer(); setCurrentView('video'); }, []);
+  const handleNavigateHome = useCallback(() => { setHomeKey(k => k + 1); setShowMoreProducts(false); setShowCarousel(false); startCycle(); }, [startCycle]);
+
+  return (
+    <div className="w-screen h-screen bg-black overflow-hidden">
+      {currentView === 'home' && !showMoreProducts && !showCarousel && (
+        <Home
+          key={homeKey}
+          onNavigateToVideo={handleNavigateToVideo}
+          onNavigateHome={handleNavigateHome}
+          showMoreProducts={showMoreProducts}
+          setShowMoreProducts={setShowMoreProducts}
+        />
+      )}
+
+      {showMoreProducts && !showCarousel && (
+        <MoreProducts
+          onBack={() => { setShowMoreProducts(false); handleNavigateHome(); }}
+          onOpenCarousel={() => setShowCarousel(true)}
+        />
+      )}
+
+      {showCarousel && (
+        <ProductsCarousel
+          onBackToGrid={() => setShowCarousel(false)}
+          onNavigateToVideo={handleNavigateToVideo}
+          onNavigateHome={handleNavigateHome}
+        />
+      )}
+
+      <NavButtons onNavigateToVideo={handleNavigateToVideo} onNavigateHome={handleNavigateHome} />
+
+      {/* Video overlays everything */}
+      <VideoScreen 
+        onEnded={handleVideoEnd} 
+        isActive={currentView === 'video'} 
+      />
+
+      {/* Overlay: date/time, fullscreen — home & video only (not MoreProducts/Carousel — they have own fullscreen) */}
+      {!showMoreProducts && !showCarousel && (
+        <>
+          <div className="fixed top-4 left-4 z-[70]">
+            <DateTimeDisplay />
+          </div>
+
+          <button
+            type="button"
+            data-fullscreen-toggle
+            onClick={toggleFullscreen}
+            className="fixed top-4 right-4 z-[70] w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white transition-colors"
+            title={isFullscreen ? 'יציאה ממסך מלא' : 'מסך מלא'}
+          >
+            {isFullscreen ? <Minimize className="w-6 h-6" /> : <Maximize className="w-6 h-6" />}
+          </button>
+        </>
+      )}
+    </div>
+  );
+}
