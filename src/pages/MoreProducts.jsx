@@ -24,13 +24,12 @@ function ProductCard({ product }) {
   return (
     <button
       onClick={() => product.url && window.open(product.url, '_blank')}
-      className="product-card relative flex flex-col items-center justify-center text-center rounded-2xl transition-all duration-200 active:scale-95 overflow-hidden group aspect-square w-full"
+      className="product-card relative flex flex-col items-center justify-center text-center rounded-[45px] transition-all duration-200 active:scale-95 overflow-hidden group aspect-square w-full"
       style={{
-        padding: '0.8vh 6%',
+        padding: '1vh 6%',
         gap: '0.5vh',
         background: 'linear-gradient(160deg, var(--card-grad-from), var(--card-grad-to))',
-        boxShadow: '0 8px 22px rgba(0,58,87,0.28), 0 2px 6px rgba(0,0,0,0.18)',
-        borderBottom: '2px solid rgba(0,0,0,0.15)'
+        boxShadow: '0 8px 22px rgba(0,58,87,0.28), 0 5px 6px rgba(0,0,0,0.18), inset -4px -4px 0 rgba(0, 0, 0, 0.18)'
       }}
     >
       <div className="pointer-events-none absolute" style={{ top: '-30%', right: '-15%', width: '75%', height: '75%', borderRadius: '9999px', background: 'radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%)' }} />
