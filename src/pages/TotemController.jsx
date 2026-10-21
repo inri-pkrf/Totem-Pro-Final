@@ -11,11 +11,14 @@ import DateTimeDisplay from '../components/totem/DateTimeDisplay';
 const COLOR_SCREEN_COUNT = 4;
 const COLOR_DURATION = 5000;
 const HOME_DURATION = 300000;
+const MORE_PRODUCTS_HASH = '#more-products';
 
 export default function TotemController() {
   const [currentView, setCurrentView] = useState('home');
   const [homeKey, setHomeKey] = useState(0);
-  const [showMoreProducts, setShowMoreProducts] = useState(false);
+  const [showMoreProducts, setShowMoreProducts] = useState(
+    () => window.location.hash === MORE_PRODUCTS_HASH
+  );
   const [showCarousel, setShowCarousel] = useState(false);
   const timerRef = useRef(null);
   const { isFullscreen, toggle: toggleFullscreen } = useFullscreen();
@@ -30,6 +33,26 @@ export default function TotemController() {
     };
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+  // קישור ייעודי ל"עוד מוצרים דיגיטליים": <כתובת האתר>#more-products
+  // סנכרון מצב המסך <-> ה-hash בכתובת, כדי שאפשר יהיה להצמיד/לשמור את הקישור
+  useEffect(() => {
+    if (showMoreProducts && window.location.hash !== MORE_PRODUCTS_HASH) {
+      window.location.hash = MORE_PRODUCTS_HASH;
+    } else if (!showMoreProducts && window.location.hash === MORE_PRODUCTS_HASH) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  }, [showMoreProducts]);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const isMore = window.location.hash === MORE_PRODUCTS_HASH;
+      setShowMoreProducts(isMore);
+      if (!isMore) setShowCarousel(false);
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
   const clearTimer = () => {
