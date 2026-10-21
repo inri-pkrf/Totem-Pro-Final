@@ -21,10 +21,14 @@ const GAMES = [
 ];
 
 
-function ProductCard({ product }) {
+function ProductCard({ product, sameTab = false }) {
   return (
     <button
-      onClick={() => product.url && window.open(product.url, '_blank')}
+      onClick={() => {
+        if (!product.url) return;
+        if (sameTab) window.location.href = product.url;
+        else window.open(product.url, '_blank');
+      }}
       className="product-card relative flex flex-col items-center justify-center text-center rounded-[45px] transition-all duration-200 active:scale-95 overflow-hidden group aspect-square w-full"
       style={{
         padding: '1vh 6%',
@@ -51,7 +55,7 @@ function ProductCard({ product }) {
   );
 }
 
-function ProductSection({ title, products, style }) {
+function ProductSection({ title, products, style, sameTab = false }) {
   return (
     <div
       className="rounded-2xl flex flex-col"
@@ -69,7 +73,7 @@ function ProductSection({ title, products, style }) {
         }}
       >
         {products.map((product, i) => (
-          <ProductCard key={i} product={product} />
+          <ProductCard key={i} product={product} sameTab={sameTab} />
         ))}
       </div>
     </div>
@@ -126,6 +130,7 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
         <ProductSection
           title="משחקים"
           products={GAMES}
+          sameTab
           style={{
             background: 'linear-gradient(135deg, rgba(0, 126, 189, 0.03), rgba(0, 58, 87, 0.02))',
             border: '2px dashed rgba(0,58,87,0.12)',
