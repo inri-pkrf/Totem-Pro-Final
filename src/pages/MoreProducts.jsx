@@ -13,7 +13,7 @@ const GAMES = [
   { title: 'התאמת לוגואים', subtitle: 'התאמת לוגואים וסמלים אינטראקטיבית', icon: img('products/logos.png'), url: 'https://logo-game-murex.vercel.app' },
   { title: 'מבצע ציוד', subtitle: 'חילוץ והצלה - התאמת הציוד למצב', icon: img('products/equipment.png'), url: 'https://inri-pkrf.github.io/Equipment-Game-/' },
   { title: 'משחק הזיכרון', subtitle: 'אימון זיכרון באמצעות כרטיסי התאמה', icon: img('products/memory.png'), url: 'https://inri-pkrf.github.io/Memory-shield-game/' },
-  { title: 'טריוויה התגוננות', subtitle: 'טריוויה אינטראקטיבית על מדיניות ההתגוננות', icon: img('products/trivia.png'), url: 'https://defend-smart-ready.base44.app' },
+  { title: 'טריוויה התגוננות', subtitle: 'טריוויה אינטראקטיבית על מדיניות ההתגוננות', icon: img('products/trivia.png'), url: 'https://defend-policy-trivia-firebase-2.vercel.app/' },
   { title: 'לוח המדיניות', subtitle: 'תחרות בין קבוצות בנושא מדיניות ההתגוננות', icon: img('products/fate-board.png'), url: 'https://defend-policy-board-with-firebase.vercel.app/' },
   { title: 'אמת או מיתוס', subtitle: 'בדיקת עובדות על מדיניות ההתגוננות', icon: img('products/myth.png'), url: 'https://fact-myth-game.vercel.app' },
   { title: 'דגים הנחיות', subtitle: 'איסוף הנחיות התגוננות מהים', icon: img('products/fish.png'), url: 'https://fish-game-plum.vercel.app/' },
