@@ -20,6 +20,12 @@ const GAMES = [
   
 ];
 
+const EARTHQUAKE = [
+  { title: 'היערכות לרעידת אדמה', subtitle: 'זיהוי חפצים מסוכנים לצורך היערכות לרעידת אדמה', icon: img('products/earthquake-icon.svg'), url: 'https://inri-pkrf.github.io/raad-game/' },
+  { title: 'סימולציית רעידת אדמה', subtitle: 'החלטה אחת בעת רעידת אדמה משנה הכל ', icon: img('products/earthquake-simulation-icon.svg'), url: 'https://inri-pkrf.github.io/quake-game/' },
+  { title: 'סכנות לאחר רעידת אדמה', subtitle: 'סכנות לאחר התרחשות אירוע רעידת אדמה', icon: img('products/post-earthquake-hazards-icon.svg'), url: 'https://inri-pkrf.github.io/afterEarthquake-project/' },
+
+];  
 
 function ProductCard({ product, sameTab = false }) {
   return (
@@ -55,25 +61,43 @@ function ProductCard({ product, sameTab = false }) {
   );
 }
 
-function ProductSection({ title, products, style, sameTab = false }) {
+function ProductSection({
+  title,
+  products,
+  style,
+  sameTab = false,
+  columns = 4,
+}) {
   return (
     <div
       className="rounded-2xl flex flex-col"
       style={{ ...style, padding: '1vh 1.5%' }}
     >
-      <h2 className="font-karantina text-[#003A57] font-normal text-center leading-none" style={{ fontSize: 'clamp(2.2rem, 5vh, 4.4rem)', marginBottom: '0.8vh' }}>
+      <h2
+        className="font-karantina text-[#003A57] font-normal text-center leading-none"
+        style={{
+          fontSize: 'clamp(2.2rem, 5vh, 4.4rem)',
+          marginBottom: '0.8vh',
+        }}
+      >
         {title}
       </h2>
+
       <div
-        className="grid w-full mx-auto"
+        className="grid mx-auto"
         style={{
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
           gap: '1vh 1%',
-          maxWidth: '1100px'
+          width: '100%',
+          maxWidth: columns === 3 ? '825px' : '1100px',
         }}
       >
         {products.map((product, i) => (
-          <ProductCard key={i} product={product} sameTab={sameTab} />
+          <ProductCard
+            key={i}
+            product={product}
+            sameTab={sameTab}
+          />
         ))}
       </div>
     </div>
@@ -136,6 +160,19 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
             border: '2px dashed rgba(0,58,87,0.12)',
             '--card-grad-from': '#0f9268ff',
             '--card-grad-to': '#38B38C',
+          }}
+        />
+        <ProductSection
+          title="רעידת אדמה"
+          products={EARTHQUAKE}
+          sameTab
+          columns={3}
+          style={{
+            background:
+              'linear-gradient(135deg, rgba(189, 129, 0, 0.03), rgba(87, 57, 0, 0.02))',
+            border: '2px dashed rgba(82, 67, 0, 0.12)',
+            '--card-grad-from': 'rgb(107, 73, 10)',
+            '--card-grad-to': '#b38838',
           }}
         />
       </div>
