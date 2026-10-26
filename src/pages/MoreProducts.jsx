@@ -132,7 +132,7 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
       </div>
 
       {/* Title */}
-      <div className="text-center z-20 absolute top-0 inset-x-0 pointer-events-none" style={{ marginTop: '6vh' }}>
+      <div className="text-center z-20 absolute top-0 inset-x-0 pointer-events-none" style={{ marginTop: '2vh' }}>
         <h1 className="font-karantina text-[#003A57] font-normal leading-none"
           style={{ fontSize: 'clamp(2.7rem, 7.5vh, 7.5rem)' }}>
           עוד מוצרים דיגיטליים
