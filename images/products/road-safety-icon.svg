@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none" stroke="#2a2d34" stroke-width="14" stroke-linejoin="round" stroke-linecap="round">
+  <!-- road -->
+  <path d="M96 470 L196 250 H316 L416 470 Z" fill="#5b6270"/>
+  <path d="M256 262 V300 M256 330 V380 M256 410 V458" stroke="#ffffff" stroke-width="12"/>
+  <!-- traffic light -->
+  <rect x="204" y="34" width="104" height="196" rx="26" fill="#3a3f4b"/>
+  <circle cx="256" cy="82" r="22" fill="#ef5350"/>
+  <circle cx="256" cy="132" r="22" fill="#ffd54f"/>
+  <circle cx="256" cy="182" r="22" fill="#66bb6a"/>
+  <!-- warning sign -->
+  <path d="M402 214 L452 306 H352 Z" fill="#ffd54f"/>
+  <path d="M402 242 V270" stroke-width="12"/>
+  <circle cx="402" cy="288" r="3" fill="#2a2d34" stroke-width="8"/>
+</svg>
