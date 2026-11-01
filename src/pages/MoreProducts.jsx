@@ -25,9 +25,14 @@ const EARTHQUAKE = [
   { title: 'סימולציית רעידת אדמה', subtitle: 'החלטה אחת בעת רעידת אדמה משנה הכל ', icon: img('products/earthquake-simulation-icon.svg'), url: 'https://inri-pkrf.github.io/quake-game/' },
   { title: 'סכנות לאחר רעידת אדמה', subtitle: 'סכנות לאחר התרחשות אירוע רעידת אדמה', icon: img('products/post-earthquake-hazards-icon.svg'), url: 'https://inri-pkrf.github.io/afterEarthquake-project/' },
 
-];  
+];
 
-function ProductCard({ product, sameTab = false }) {
+// TODO: להחליף בקישור האמיתי של משחק "זהירות בדרכים" (כל עוד ריק - הכרטיס לא פותח כלום)
+const ROAD_SAFETY = [
+  { title: 'זהירות בדרכים', subtitle: 'משחק על התנהגות בטוחה בדרכים', icon: img('products/road-safety-icon.svg'), url: '' },
+];
+
+function ProductCard({ product, sameTab = false, aspect, compact = false }) {
   return (
     <button
       onClick={() => {
@@ -39,6 +44,7 @@ function ProductCard({ product, sameTab = false }) {
       style={{
         padding: '1vh 6%',
         gap: '0.5vh',
+        ...(aspect ? { aspectRatio: aspect } : {}),
         background: 'linear-gradient(160deg, var(--card-grad-from), var(--card-grad-to))',
         boxShadow: '0 8px 22px rgba(0,58,87,0.28), 0 5px 6px rgba(0,0,0,0.18), inset -4px -4px 0 rgba(0, 0, 0, 0.18)'
       }}
@@ -49,7 +55,7 @@ function ProductCard({ product, sameTab = false }) {
         alt={product.title}
         onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
         className="object-contain transition-transform duration-200 group-active:scale-105"
-        style={{ width: 'clamp(60px, 9.75vh, 114px)', height: 'clamp(60px, 9.75vh, 114px)' }}
+        style={compact ? { width: 'clamp(50px, 7.6vh, 90px)', height: 'clamp(50px, 7.6vh, 90px)' } : { width: 'clamp(60px, 9.75vh, 114px)', height: 'clamp(60px, 9.75vh, 114px)' }}
       />
       <h3 className="font-assistant font-bold text-white leading-tight" style={{ fontSize: 'clamp(1.5rem, 1.8vh, 1.5rem)' }}>
         {product.title}
@@ -67,16 +73,28 @@ function ProductSection({
   style,
   sameTab = false,
   columns = 4,
+  maxWidth,
+  padding = '1vh 1.5%',
+  gap = '1vh 1%',
+  titleSize = 'clamp(2.2rem, 5vh, 4.4rem)',
+  cardAspect,
+  colWidth,
+  titleLines = 1,
 }) {
   return (
     <div
       className="rounded-2xl flex flex-col"
-      style={{ ...style, padding: '1vh 1.5%' }}
+      style={{ ...style, padding }}
     >
       <h2
         className="font-karantina text-[#003A57] font-normal text-center leading-none"
         style={{
-          fontSize: 'clamp(2.2rem, 5vh, 4.4rem)',
+          fontSize: titleSize,
+          height: `calc(${titleLines} * clamp(2.2rem, 5vh, 4.4rem))`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          whiteSpace: titleLines > 1 ? 'normal' : 'nowrap',
           marginBottom: '0.8vh',
         }}
       >
@@ -86,10 +104,10 @@ function ProductSection({
       <div
         className="grid mx-auto"
         style={{
-          gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-          gap: '1vh 1%',
+          gridTemplateColumns: `repeat(${columns}, ${colWidth ?? 'minmax(0, 1fr)'})`,
+          gap,
           width: '100%',
-          maxWidth: columns === 3 ? '825px' : '1100px',
+          maxWidth: maxWidth ?? (columns === 3 ? '825px' : '1100px'),
         }}
       >
         {products.map((product, i) => (
@@ -97,6 +115,8 @@ function ProductSection({
             key={i}
             product={product}
             sameTab={sameTab}
+            aspect={cardAspect}
+            compact={titleLines > 1}
           />
         ))}
       </div>
@@ -162,19 +182,59 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
             '--card-grad-to': '#38B38C',
           }}
         />
-        <ProductSection
-          title="רעידת אדמה"
-          products={EARTHQUAKE}
-          sameTab
-          columns={3}
+        {/* רעידת אדמה + זהירות בדרכים באותה שורה: 4 כרטיסים ריבועיים בגודל זהה לשאר המסך */}
+        <div
+          className="flex justify-between"
           style={{
-            background:
-              'linear-gradient(135deg, rgba(189, 129, 0, 0.03), rgba(87, 57, 0, 0.02))',
-            border: '2px dashed rgba(82, 67, 0, 0.12)',
-            '--card-grad-from': 'rgb(107, 73, 10)',
-            '--card-grad-to': '#b38838',
+            containerType: 'inline-size',
+            '--c': 'calc(0.97 * 0.97 * 100cqw / 4)',
+            '--p': '6px',
+            '--gi': 'calc(0.01 * 0.97 * 100cqw)',
           }}
-        />
+        >
+          <div className="flex flex-col" style={{ width: 'calc(3 * var(--c) + 2 * var(--gi) + 2 * var(--p))' }}>
+            <ProductSection
+              title="רעידת אדמה"
+              products={EARTHQUAKE}
+              sameTab
+              columns={3}
+              colWidth="var(--c)"
+              maxWidth="none"
+              padding="1vh var(--p)"
+              gap="1vh var(--gi)"
+              titleLines={2}
+              style={{
+                flex: 1,
+                background:
+                  'linear-gradient(135deg, rgba(189, 129, 0, 0.03), rgba(87, 57, 0, 0.02))',
+                border: '2px dashed rgba(82, 67, 0, 0.12)',
+                '--card-grad-from': 'rgb(107, 73, 10)',
+                '--card-grad-to': '#b38838',
+              }}
+            />
+          </div>
+          <div className="flex flex-col" style={{ width: 'calc(var(--c) + 2 * var(--p))' }}>
+            <ProductSection
+              title="זהירות בדרכים"
+              products={ROAD_SAFETY}
+              sameTab
+              columns={1}
+              colWidth="var(--c)"
+              maxWidth="none"
+              padding="1vh var(--p)"
+              gap="1vh 0"
+              titleLines={2}
+              style={{
+                flex: 1,
+                background:
+                  'linear-gradient(135deg, rgba(200, 40, 40, 0.03), rgba(120, 20, 20, 0.02))',
+                border: '2px dashed rgba(140, 30, 30, 0.14)',
+                '--card-grad-from': '#8e1f1f',
+                '--card-grad-to': '#d9534f',
+              }}
+            />
+          </div>
+        </div>
       </div>
 
     </div>
