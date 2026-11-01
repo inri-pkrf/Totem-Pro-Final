@@ -29,7 +29,7 @@ const EARTHQUAKE = [
 
 // TODO: להחליף בקישור האמיתי של משחק "זהירות בדרכים" (כל עוד ריק - הכרטיס לא פותח כלום)
 const ROAD_SAFETY = [
-  { title: 'זהירות בדרכים', subtitle: 'משחק על התנהגות בטוחה בדרכים', icon: img('products/road-safety-icon.svg'), url: 'https://inri-pkrf.github.io/Drive-Games-Home-Page/' },
+  { title: 'זהירות בדרכים', subtitle: 'סביבת משחקים על התנהגות בטוחה בדרכים', icon: img('products/road-safety-icon.svg'), url: 'https://inri-pkrf.github.io/Drive-Games-Home-Page/' },
 ];
 
 function ProductCard({ product, sameTab = false, aspect, compact = false }) {
