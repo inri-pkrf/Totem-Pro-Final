@@ -21,10 +21,7 @@ const GAMES = [
 ];
 
 const EARTHQUAKE = [
-  { title: 'היערכות לרעידת אדמה', subtitle: 'זיהוי חפצים מסוכנים לצורך היערכות לרעידת אדמה', icon: img('products/earthquake-icon.svg'), url: 'https://inri-pkrf.github.io/raad-game/' },
-  { title: 'סימולציית רעידת אדמה', subtitle: 'החלטה אחת בעת רעידת אדמה משנה הכל ', icon: img('products/earthquake-simulation-icon.svg'), url: 'https://inri-pkrf.github.io/quake-game/' },
-  { title: 'סכנות לאחר רעידת אדמה', subtitle: 'סכנות לאחר התרחשות אירוע רעידת אדמה', icon: img('products/post-earthquake-hazards-icon.svg'), url: 'https://inri-pkrf.github.io/afterEarthquake-project/' },
-
+  { title: 'סביבת רעידת אדמה', subtitle: 'סביבת תוצרים הקשורים לרעידת אדמה', icon: img('products/earthquake-icon.svg'), url: 'https://inri-pkrf.github.io/EarthquakeHomePage/' },
 ];
 
 // TODO: להחליף בקישור האמיתי של משחק "זהירות בדרכים" (כל עוד ריק - הכרטיס לא פותח כלום)
@@ -184,24 +181,25 @@ export default function MoreProducts({ onBack, onOpenCarousel }) {
         />
         {/* רעידת אדמה + זהירות בדרכים באותה שורה: 4 כרטיסים ריבועיים בגודל זהה לשאר המסך */}
         <div
-          className="flex justify-between"
+          className="flex start"
           style={{
             containerType: 'inline-size',
             '--c': 'calc(0.97 * 0.97 * 100cqw / 4)',
             '--p': '6px',
             '--gi': 'calc(0.01 * 0.97 * 100cqw)',
+            gap: 'var(--gi)',
           }}
         >
-          <div className="flex flex-col" style={{ width: 'calc(3 * var(--c) + 2 * var(--gi) + 2 * var(--p))' }}>
+          <div className="flex flex-col" style={{ width: 'calc(var(--c) + 2 * var(--p))' }}>
             <ProductSection
               title="רעידת אדמה"
               products={EARTHQUAKE}
               sameTab
-              columns={3}
+              columns={1}
               colWidth="var(--c)"
               maxWidth="none"
               padding="1vh var(--p)"
-              gap="1vh var(--gi)"
+              gap="1vh 0"
               titleLines={2}
               style={{
                 flex: 1,
